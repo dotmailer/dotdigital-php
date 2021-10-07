@@ -1,0 +1,11 @@
+{
+    "name": "dotdigital/dotdigital-php",
+    "description": "Dotdigital PHP Library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dotdigital\\DotdigitalPhp\\": "src/"
+        }
+    },
+    "require": {}
+}
