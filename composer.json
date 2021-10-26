@@ -4,8 +4,19 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Dotdigital\\DotdigitalPhp\\": "src/"
+            "Dotdigital\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "psr/http-client": "^1.0",
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory-implementation": "^1.0",
+        "php-http/client-common": "^2.4",
+        "php-http/discovery": "^1.14"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
 }
