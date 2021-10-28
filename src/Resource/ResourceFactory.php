@@ -9,8 +9,6 @@ use Dotdigital\Client;
 /**
  * Factory class for API resources.
  *
- * @property AccountInfo $accountInfo
- * @property Programs $programs
  */
 class ResourceFactory
 {

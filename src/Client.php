@@ -13,6 +13,10 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Authentication\BasicAuth;
 use Http\Message\UriFactory;
 
+/**
+ * @property Resource\AccountInfo $accountInfo
+ * @property Resource\Programs $programs
+ */
 class Client
 {
 	const API_VERSION = 'v2';
