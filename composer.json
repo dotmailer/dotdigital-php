@@ -17,6 +17,7 @@
         "php-http/discovery": "^1.14"
     },
     "require-dev": {
-        "guzzlehttp/guzzle": "^7.4"
+        "guzzlehttp/guzzle": "^7.4",
+        "symplify/easy-coding-standard": "^9.4"
     }
 }
