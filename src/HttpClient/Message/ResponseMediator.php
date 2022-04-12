@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dotdigital\HttpClient\Message;
 
+use Dotdigital\Exception\ResponseValidationException;
 use Psr\Http\Message\ResponseInterface;
 
 final class ResponseMediator
@@ -11,15 +12,21 @@ final class ResponseMediator
     /**
      * @param ResponseInterface $response
      *
-     * @return array|string
+     * @return string
      */
-	public static function getContent(ResponseInterface $response)
-	{
-	    $content = $response->getBody()->getContents();
-	    if (json_decode($content)) {
-            return json_decode($content, true);
+    public static function getContent(ResponseInterface $response)
+    {
+        $content = $response->getBody()->getContents();
+
+        if (!json_decode($content)) {
+            throw new ResponseValidationException('Cannot decode response.');
         }
 
-	    return $content;
-	}
+        $decoded = json_decode($content, true);
+        if (isset($decoded['message'])) {
+            throw new ResponseValidationException($decoded['message']);
+        }
+
+        return $content;
+    }
 }

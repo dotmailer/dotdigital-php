@@ -16,7 +16,7 @@ For local development, it is expected that you have a folder structure like:
 You should run the following commands:
 ```
 composer init
-composer config repositories.repo-name path ../dotdigital-php
+composer config repositories.dotdigital-php path ../dotdigital-php
 composer require dotdigital/dotdigital-php:dev-develop guzzlehttp/guzzle php-http/guzzle7-adapter
 ```
 

@@ -16,37 +16,52 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 final class ClientBuilder
 {
-	private $httpClient;
+    /**
+     * @var \Http\Client\HttpClient|ClientInterface|null
+     */
+    private $httpClient;
 
-	private $requestFactoryInterface;
+    /**
+     * @var RequestFactoryInterface|null
+     */
+    private $requestFactoryInterface;
 
-	private $streamFactoryInterface;
+    /**
+     * @var StreamFactoryInterface|null
+     */
+    private $streamFactoryInterface;
 
-	private $plugins = [];
+    /**
+     * @var array<mixed>
+     */
+    private $plugins = [];
 
-	public function __construct(
-		ClientInterface $httpClient = null,
-		RequestFactoryInterface $requestFactoryInterface = null,
-		StreamFactoryInterface $streamFactoryInterface = null
-	) {
-		$this->httpClient = $httpClient ?: HttpClientDiscovery::find();
-		$this->requestFactoryInterface = $requestFactoryInterface ?: Psr17FactoryDiscovery::findRequestFactory();
-		$this->streamFactoryInterface = $streamFactoryInterface ?: Psr17FactoryDiscovery::findStreamFactory();
-	}
+    public function __construct(
+        ClientInterface $httpClient = null,
+        RequestFactoryInterface $requestFactoryInterface = null,
+        StreamFactoryInterface $streamFactoryInterface = null
+    ) {
+        $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
+        $this->requestFactoryInterface = $requestFactoryInterface ?: Psr17FactoryDiscovery::findRequestFactory();
+        $this->streamFactoryInterface = $streamFactoryInterface ?: Psr17FactoryDiscovery::findStreamFactory();
+    }
 
-	public function addPlugin(Plugin $plugin): void
-	{
-		$this->plugins[] = $plugin;
-	}
+    /**
+     * @param Plugin $plugin
+     */
+    public function addPlugin(Plugin $plugin): void
+    {
+        $this->plugins[] = $plugin;
+    }
 
-	public function getHttpClient(): HttpMethodsClientInterface
-	{
-		$pluginClient = (new PluginClientFactory())->createClient($this->httpClient, $this->plugins);
+    public function getHttpClient(): HttpMethodsClientInterface
+    {
+        $pluginClient = (new PluginClientFactory())->createClient($this->httpClient, $this->plugins);
 
-		return new HttpMethodsClient(
-			$pluginClient,
-			$this->requestFactoryInterface,
-			$this->streamFactoryInterface
-		);
-	}
+        return new HttpMethodsClient(
+            $pluginClient,
+            $this->requestFactoryInterface,
+            $this->streamFactoryInterface
+        );
+    }
 }
