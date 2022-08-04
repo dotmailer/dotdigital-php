@@ -4,7 +4,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Dotdigital\\": "src/"
+            "Dotdigital\\": "src/",
+            "Dotdigital\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -19,6 +20,7 @@
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
         "symplify/easy-coding-standard": "^9.4",
-        "phpstan/phpstan": "^1.0"
+        "phpstan/phpstan": "^1.0",
+        "phpunit/phpunit": "^9.5"
     }
 }
