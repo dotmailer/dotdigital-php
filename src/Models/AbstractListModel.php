@@ -40,6 +40,9 @@ abstract class AbstractListModel extends AbstractModel
             $content = json_decode($content, true);
         }
         foreach ($content as $key => $value) {
+            if ($this->ignoreKey($key)) {
+                continue;
+            }
             $this->$key = $this->getOne($value);
         }
     }
@@ -52,5 +55,18 @@ abstract class AbstractListModel extends AbstractModel
     public function toArray()
     {
         return (array) $this;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function ignoreKey($key)
+    {
+        if (property_exists($this, 'ignore')) {
+            return in_array($key, $this->ignore);
+        };
+
+        return false;
     }
 }

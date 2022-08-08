@@ -29,7 +29,8 @@ class ResourceFactory
         'accountInfo' => AccountInfo::class,
         'programs' => Programs::class,
         'addressBooks' => AddressBooks::class,
-        'dataFields' => DataFields::class
+        'dataFields' => DataFields::class,
+        'contacts' => Contacts::class,
     ];
 
     /**

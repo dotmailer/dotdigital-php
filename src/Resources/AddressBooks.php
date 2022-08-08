@@ -6,19 +6,22 @@ namespace Dotdigital\Resources;
 
 use Dotdigital\Models\AddressBook;
 use Dotdigital\Models\AddressBookList;
+use Dotdigital\Models\Contact;
+use Dotdigital\Models\ContactList;
 
 class AddressBooks extends AbstractResource
 {
     public const RESOURCE_BASE = '/address-books';
 
     /**
-     * @return AddressBook[]
+     * Get list of address books.
+     *
+     * @return AddressBookList
      * @throws \Http\Client\Exception
      */
     public function show()
     {
-        $list = new AddressBookList($this->get(self::RESOURCE_BASE));
-        return $list->toArray();
+        return new AddressBookList($this->get(self::RESOURCE_BASE));
     }
 
     /**
@@ -29,13 +32,13 @@ class AddressBooks extends AbstractResource
      * @param string|null $optInType
      * @param string|null $emailType
      * @param array<mixed> $dataFields
-     * @return string
+     * @return Contact
      * @throws \Dotdigital\Exception\ResponseValidationException
      * @throws \Http\Client\Exception
      */
     public function addContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], string $optInType = null, string $emailType = null)
     {
-        return $this->post(
+        $response = $this->post(
             sprintf(
                 self::RESOURCE_BASE . '/%s' . '/contacts',
                 $addressBookId
@@ -47,6 +50,7 @@ class AddressBooks extends AbstractResource
                 "dataFields" => $this->resolveDataFields($dataFields)
             ]
         );
+        return new Contact($response);
     }
 
     /**
@@ -57,13 +61,13 @@ class AddressBooks extends AbstractResource
      * @param array<mixed> $dataFields
      * @param string|null $preferredLocale
      * @param string|null $returnUrlToUseIfChallenged
-     * @return string
+     * @return ContactList
      * @throws \Dotdigital\Exception\ResponseValidationException
      * @throws \Http\Client\Exception
      */
     public function resubscribeContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], string $preferredLocale = null, string $returnUrlToUseIfChallenged = null)
     {
-        return $this->post(
+        $response = $this->post(
             sprintf(
                 self::RESOURCE_BASE . '/%s/' . 'contacts/resubscribe',
                 $addressBookId
@@ -77,5 +81,7 @@ class AddressBooks extends AbstractResource
                 "returnUrlToUseIfChallenged" => $returnUrlToUseIfChallenged
             ]
         );
+
+        return new ContactList($response);
     }
 }
