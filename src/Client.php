@@ -16,6 +16,8 @@ use Http\Message\UriFactory;
 /**
  * @property Resources\AccountInfo $accountInfo
  * @property Resources\Programs $programs
+ * @property Resources\AddressBooks $addressBooks
+ * @property Resources\DataFields $dataFields
  */
 class Client
 {

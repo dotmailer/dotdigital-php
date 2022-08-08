@@ -21,6 +21,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "symplify/easy-coding-standard": "^9.4",
         "phpstan/phpstan": "^1.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "php-http/curl-client": "^2.2"
     }
 }

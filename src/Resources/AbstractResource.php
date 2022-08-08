@@ -58,4 +58,25 @@ abstract class AbstractResource
         );
         return ResponseMediator::getContent($response);
     }
+
+    /**
+     * Resolve data fields.
+     *
+     * Resolves data fields array to an accepted format.
+     *
+     * @param array<mixed> $dataFields
+     * @return array<mixed>
+     */
+    protected function resolveDataFields(array $dataFields = [])
+    {
+        $objectArray = [];
+        foreach ($dataFields as $key => $value) {
+            $objectArray[] = [
+                "key" => $key,
+                "value" => $value
+            ];
+        }
+
+        return $objectArray;
+    }
 }

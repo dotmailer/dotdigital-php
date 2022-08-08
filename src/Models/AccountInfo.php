@@ -34,4 +34,20 @@ class AccountInfo extends AbstractSingletonModel
     {
         return new AccountInfoPropertyList($properties);
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return AccountInfoProperty[]
+     */
+    public function getProperties(): array
+    {
+        return $this->properties;
+    }
 }
