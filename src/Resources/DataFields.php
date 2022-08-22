@@ -12,12 +12,12 @@ class DataFields extends AbstractResource
     public const RESOURCE_BASE = '/data-fields';
 
     /**
-     * @return DataField[]
+     * @return DataFieldList
      * @throws \Http\Client\Exception
+     * @throws \Exception
      */
     public function show()
     {
-        $list = new DataFieldList($this->get(self::RESOURCE_BASE));
-        return $list->toArray();
+        return new DataFieldList($this->get(self::RESOURCE_BASE));
     }
 }

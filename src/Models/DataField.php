@@ -31,4 +31,12 @@ class DataField extends AbstractSingletonModel
      * @var mixed
      */
     protected $defaultValue;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }
