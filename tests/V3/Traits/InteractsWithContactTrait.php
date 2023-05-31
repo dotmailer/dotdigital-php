@@ -1,73 +1,22 @@
 <?php
 
-namespace Dotdigital\Tests\V3\Integration;
+namespace Dotdigital\Tests\V3\Traits;
 
-use Dotdigital\AbstractClient;
-use Dotdigital\Exception\ResponseValidationException;
-use Dotdigital\V3\Resources\Contacts;
-use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
+use Dotdigital\V3\Models\Contact;
+use Dotdigital\V3\Models\ContactCollection;
+use Faker\Factory as FakerFactory;
 
-
-/**
- * @runTestsInSeparateProcesses
- * @coversDefaultClass \Dotdigital\V3\Resources\Contacts
- */
-class ContactImportTest extends TestCase
+trait InteractsWithContactTrait
 {
+    public const MOCK_LISTS = [];
 
-    use InteractsWithContactTrait;
-    protected string $resourceBase = Contacts::RESOURCE_BASE;
+    public const MOCK_PREFERENCES = [];
 
-    protected AbstractClient $client;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->testSuccessResponse();
-    }
-
-    public function testSuccessfulContactImport()
-    {
-        $this->markTestSkipped('must be revisited.');
-        $contactCollection = $this->buildContactCollection();
-        $importId = $this->client->contacts->import($contactCollection);
-
-        $this->assertIsString($importId);
-        return $importId;
-    }
-
-    /**
-     * SNAG: currently omitting matchidentifier does not return an errorCode
-     *
-     * @return void
-     */
-    public function testContactImportRequiresMatchIdentifier()
-    {
-        $this->markTestSkipped('must be revisited.');
-        $contactCollection = $this->buildContactCollectionWithoutMatchIdentifier();
-
-        $this->expectException(ResponseValidationException::class);
-        $this->expectExceptionMessage('The Matchidentifiers field is required.');
-
-        $this->client->contacts->import($contactCollection);
-    }
-
-    public function testContactImportRequiresIdentifiers()
-    {
-        $this->markTestSkipped('must be revisited.');
-        $contactCollection = $this->buildContactCollectionWithoutIdentifiers();
-
-        $this->expectException(ResponseValidationException::class);
-        $this->expectExceptionMessage('The Identifiers field is required.');
-
-        $this->client->contacts->import($contactCollection);
-    }
-
-    private function buildContactCollection()
+    protected function buildContactCollection()
     {
         $contact1 = new Contact(
             [
+                ...(!empty(static::MOCK_LISTS)) ?  ['lists' => static::MOCK_LISTS] : [],
                 'matchIdentifier' => 'email',
                 'identifiers' => [
                     'email' => 'chaz0959@emailsim.io'
@@ -77,7 +26,6 @@ class ContactImportTest extends TestCase
                     'LAST_NAME' => 'Kangaroo',
                     'COMPANY' => 'Chaz Inc.'
                 ],
-                'lists' => [174867],
                 'consentRecords' => [
                     [
                         "text" => "Yes, I would like to receive a monthly newsletter",
@@ -91,6 +39,8 @@ class ContactImportTest extends TestCase
         );
         $contact2 = new Contact(
             [
+                ...(!empty(static::MOCK_LISTS)) ?  ['lists' => static::MOCK_LISTS] : [],
+                ...(!empty(static::MOCK_PREFERENCES)) ?  ['preferences' => static::MOCK_PREFERENCES] : [],
                 'matchIdentifier' => 'mobileNumber',
                 'identifiers' => [
                     'email' => 'chaz1702@emailsim.io',
@@ -109,13 +59,7 @@ class ContactImportTest extends TestCase
                     'sms' => [
                         'optInType' => 'Single'
                     ]
-                ],
-                'preferences' => [
-                    [
-                        'id' => 334,
-                        'isOptedIn' => false
-                    ]
-                ],
+                ]
             ]
         );
         $contact3 = new Contact(
@@ -138,28 +82,70 @@ class ContactImportTest extends TestCase
         ]);
     }
 
-    private function buildContactCollectionWithoutMatchIdentifier()
+    protected function buildContactCollectionWithoutMatchIdentifier()
     {
         $contact1 = new Contact(
             [
                 'identifiers' => [
                     'email' => 'chaz1@emailsim.io'
-                ]
+                ],
             ]
         );
 
         return new ContactCollection([$contact1]);
     }
 
-    private function buildContactCollectionWithoutIdentifiers()
+    protected function buildContactCollectionWithoutIdentifiers()
     {
         $contact1 = new Contact(
             [
-                'matchIdentifier' => 'email'
+                'matchIdentifier' => 'email',
             ]
         );
 
         return new ContactCollection([$contact1]);
     }
 
+    /**
+     * @param int $count
+     * @return ContactCollection
+     * @throws \Exception
+     */
+    public static function generateContactCollection(int $count): ContactCollection
+    {
+        $faker = FakerFactory::create();
+        $collection = new ContactCollection();
+        for ($i = 0; $i < $count; $i++) {
+            $collection->add(
+                new Contact([
+                    "matchIdentifier" => "email",
+                    "identifiers" => [
+                        "email" => $faker->safeEmail,
+                    ],
+                    "dataFields" => [
+                        "firstName" => $faker->firstName,
+                        "lastName" => $faker->lastName,
+                        "gender" => $faker->word
+                    ]
+                ])
+            );
+        }
+
+        $collection->add(
+            new Contact([
+                "matchIdentifier" => "email",
+                "identifiers" => [
+                    "email" => $faker->word,
+                ],
+                "dataFields" => [
+                    "firstName" => $faker->firstName,
+                    "lastName" => $faker->lastName,
+                    "gender" => $faker->word
+                ]
+            ])
+        );
+
+        return $collection;
+
+    }
 }

@@ -6,6 +6,8 @@ use Dotdigital\Exception\MissingArgumentException;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\Resources\AbstractResource;
 use Dotdigital\V3\Models\Contact as ContactModel;
+use Dotdigital\V3\Models\Contact\ContactImportnterface;
+use Dotdigital\V3\Models\Contact\Import;
 use Dotdigital\V3\Models\ContactCollection;
 use Http\Client\Exception;
 
@@ -33,6 +35,27 @@ class Contacts extends AbstractResource
         );
 
         return new ContactModel($response);
+    }
+
+    /**
+     * Retrieves the status of a contacts import request and the results if available.
+     *
+     * @param string $importId
+     * @return \Dotdigital\V3\Models\Contact\Import
+     * @throws Exception
+     * @throws \Exception
+     */
+    public function getImportById(string $importId): Import
+    {
+        $response = $this->get(
+            sprintf(
+                '%s/%s/%s',
+                self::RESOURCE_BASE,
+                'import',
+                $importId,
+            )
+        );
+        return new Import($response);
     }
 
     /**

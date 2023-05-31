@@ -92,7 +92,7 @@ class AbstractSingletonModel implements JsonSerializable
     /**
      * @return array<mixed>
      */
-    private function getModelProperties()
+    protected function getModelProperties()
     {
         $model = new \ReflectionClass($this);
         return $model->getProperties();

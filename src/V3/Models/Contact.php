@@ -65,6 +65,16 @@ class Contact extends AbstractSingletonModel
      */
     protected ?PreferenceCollection $preferences;
 
+    public function getContactId(): int
+    {
+        return $this->contactId;
+    }
+
+    public function getIdentifiers(): Identifiers
+    {
+        return $this->identifiers;
+    }
+
     /**
      * @param array<mixed> $data
      * @return void

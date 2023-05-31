@@ -29,7 +29,7 @@ abstract class AbstractListModel extends AbstractModel
     }
 
     /**
-     * @param array<mixed> $listItem
+     * @param array $listItem
      *
      * @return AbstractSingletonModel
      */
