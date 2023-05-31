@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Dotdigital\Models;
 
-use Dotdigital\Exception\ResponseValidationException;
-
 abstract class AbstractModel
 {
     /**

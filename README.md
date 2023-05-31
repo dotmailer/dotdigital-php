@@ -31,7 +31,7 @@ composer require php-http/curl-client
 # app/index.php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dotdigital = new \Dotdigital\Client();
+$dotdigital = new \Dotdigital\AbstractClient();
 $dotdigital::setApiUser('apiuser-123@apiconnector.com');
 $dotdigital::setApiPassword('');
 $dotdigital::setApiEndpoint('https://r1-api.dotmailer.com');

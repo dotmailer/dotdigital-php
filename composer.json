@@ -4,7 +4,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Dotdigital\\": "src/",
+            "Dotdigital\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Dotdigital\\Tests\\": "tests/"
         }
     },
@@ -20,7 +24,13 @@
         "guzzlehttp/guzzle": "^7.4",
         "symplify/easy-coding-standard": "^9.4",
         "phpstan/phpstan": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "php-http/curl-client": "^2.2"
+        "phpunit/phpunit": "^10.1.1",
+        "php-http/curl-client": "^2.2",
+        "symfony/dotenv": "^6.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }

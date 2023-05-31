@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Dotdigital\Resources;
 
-use Dotdigital\Client;
-use Dotdigital\HttpClient\Message\ResponseMediator;
+use Dotdigital\AbstractClient;
+use Dotdigital\Exception\ResponseValidationException;
 
 abstract class AbstractResource
 {
     /**
      * The client instance.
      *
-     * @var Client
+     * @var AbstractClient
      */
     private $client;
 
     /**
      * Create a new API instance.
      *
-     * @param Client $client
+     * @param AbstractClient $client
      *
      * @return void
      */
-    public function __construct(Client $client)
+    public function __construct(AbstractClient $client)
     {
         $this->client = $client;
     }
@@ -34,10 +34,10 @@ abstract class AbstractResource
      * @return string
      * @throws \Http\Client\Exception
      */
-    protected function get(string $path)
+    protected function get($path)
     {
         $response = $this->client->getHttpClient()->get($path);
-        return ResponseMediator::getContent($response);
+        return $this->client->mediateResponse($response);
     }
 
     /**
@@ -46,17 +46,38 @@ abstract class AbstractResource
      * @param array<mixed> $headers
      *
      * @return string
-     * @throws \Dotdigital\Exception\ResponseValidationException
+     * @throws ResponseValidationException
      * @throws \Http\Client\Exception
      */
-    protected function post($path, $body = [], array $headers = [])
+    protected function post(string $path, array $body = [], array $headers = [])
     {
         $response = $this->client->getHttpClient()->post(
             $path,
             $headers,
             json_encode($body)
         );
-        return ResponseMediator::getContent($response);
+
+        return $this->client->mediateResponse($response);
+    }
+
+    /**
+     * @param string $path
+     * @param array $body
+     * @param array $headers
+     *
+     * @return string
+     * @throws ResponseValidationException
+     * @throws \Http\Client\Exception
+     */
+    protected function put(string $path, array $body = [], array $headers = [])
+    {
+        $response = $this->client->getHttpClient()->put(
+            $path,
+            $headers,
+            json_encode($body)
+        );
+
+        return $this->client->mediateResponse($response);
     }
 
     /**

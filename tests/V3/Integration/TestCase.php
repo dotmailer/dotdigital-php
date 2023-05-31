@@ -1,22 +1,33 @@
 <?php
 
-namespace Dotdigital\Tests;
+namespace Dotdigital\Tests\V3\Integration;
 
 use Dotdigital\AbstractClient;
+use Dotdigital\V3\Client;
 use PHPUnit\Framework\Assert;
+use Symfony\Component\Dotenv\Dotenv;
 
-trait ApiConfigurationTrait
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AbstractClient
      */
     protected AbstractClient $client;
 
+    public function setUp(): void
+    {
+        $dotenv = new Dotenv();
+        $dotenv->load(__DIR__.'/.env');
+
+        $this->client = new Client();
+        $this->clientInit();
+    }
+
     protected function clientInit(): void
     {
-        $this->client::setApiUser('demo@apiconnector.com');
-        $this->client::setApiPassword('demo');
-        $this->client::setApiEndpoint('https://r1-api.dotmailer.com');
+        $this->client::setApiUser($_ENV['DOTDIGITAL_API_USER']);
+        $this->client::setApiPassword($_ENV['DOTDIGITAL_API_PASSWORD']);
+        $this->client::setApiEndpoint($_ENV['DOTDIGITAL_API_ENDPOINT']);
     }
 
     /** @test */

@@ -4,74 +4,40 @@ declare(strict_types=1);
 
 namespace Dotdigital\Resources;
 
-use Dotdigital\Client;
+use Dotdigital\AbstractClient;
 
 /**
  * Factory class for API resources.
- *
  */
 class ResourceFactory
 {
     /**
-     * @var Client
+     * @var AbstractClient
      */
     private $client;
 
     /**
-     * @var array<string, AbstractResource>
-     */
-    private $resources;
-
-    /**
-     * @var array<string, string>
-     */
-    private static $classMap = [
-        'accountInfo' => AccountInfo::class,
-        'programs' => Programs::class,
-        'addressBooks' => AddressBooks::class,
-        'dataFields' => DataFields::class,
-        'contacts' => Contacts::class,
-    ];
-
-    /**
      * ResourceFactory constructor.
      *
-     * @param Client $client
+     * @param AbstractClient $client
      */
-    public function __construct($client)
+    public function __construct(AbstractClient $client)
     {
         $this->client = $client;
-        $this->resources = [];
     }
 
     /**
-     * @param string $name
-     *
+     * @param string $className
      * @return null|AbstractResource
      */
-    public function __get($name)
+    public function __get(string $className)
     {
-        $resourceClass = $this->getResourceClass($name);
-        if (null !== $resourceClass) {
-            if (!\array_key_exists($name, $this->resources)) {
-                $this->resources[$name] = new $resourceClass($this->client);
-            }
-
-            return $this->resources[$name];
+        if (class_exists($className)) {
+            return new $className($this->client);
         }
 
-        \trigger_error('Undefined property: ' . static::class . '::$' . $name);
+        \trigger_error('Undefined property: ' . static::class . '::$' . $className);
 
         return null;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string|null
-     */
-    protected function getResourceClass($name)
-    {
-        return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;
     }
 }
