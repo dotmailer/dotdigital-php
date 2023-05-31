@@ -17,57 +17,19 @@ class Contacts extends AbstractResource
     public const DEFAULT_RESUBSCRIBE_NO_CHALLENGE = false;
 
     /**
-     * Post contact given email or mobile number or both.
+     * Post contact given email or mobile number or both..
      *
-     * @param array $identifiers
-     * @param array $dataFields
-     * @param array $channelProperties
-     * @param array $lists
-     * @param array $preferences
-     * @param array $consentRecords
-     *
+     * @param ContactModel $contact
      * @return ContactModel
-     * @throws MissingArgumentException
-     * @throws ResponseValidationException
      * @throws Exception
+     * @throws ResponseValidationException
      */
     public function create(
-        array $identifiers,
-        array $dataFields = [],
-        array $channelProperties = [],
-        array $lists = [],
-        array $preferences = [],
-        array $consentRecords = []
+        ContactModel $contact
     ): ContactModel {
-        if (!array_key_exists('email', $identifiers) && !array_key_exists('mobileNumber', $identifiers)) {
-            throw new MissingArgumentException('Please provide either an email or mobileNumber identifier.');
-        }
-
-        $data['identifiers'] = $identifiers;
-
-        if (!empty($channelProperties)) {
-            $data['channelProperties'] = $channelProperties;
-        }
-
-        if (!empty($dataFields)) {
-            $data['dataFields'] = $dataFields;
-        }
-
-        if (!empty($consentRecords)) {
-            $data['consentRecords'] = $consentRecords;
-        }
-
-        if (!empty($lists)) {
-            $data['listIds'] = $lists;
-        }
-
-        if (!empty($preferences)) {
-            $data['preferences'] = $preferences;
-        }
-
         $response = $this->post(
             self::RESOURCE_BASE,
-            $data
+            json_decode(json_encode($contact), true)
         );
 
         return new ContactModel($response);
