@@ -39,4 +39,12 @@ class DataField extends AbstractSingletonModel
     {
         return $this->name;
     }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
 }
