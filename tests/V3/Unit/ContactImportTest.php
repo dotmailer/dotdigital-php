@@ -6,10 +6,10 @@ use Dotdigital\V3\Models\Contact;
 use Dotdigital\V3\Models\Contact\Identifier;
 use Dotdigital\V3\Models\Contact\Identifiers;
 use Dotdigital\V3\Models\Contact\Import;
-use Dotdigital\V3\Models\Contact\import\Failure;
-use Dotdigital\V3\Models\Contact\import\FailureDetail;
-use Dotdigital\V3\Models\Contact\import\FailureDetailCollection;
-use Dotdigital\V3\Models\Contact\import\Summary;
+use Dotdigital\V3\Models\Contact\Import\Failure;
+use Dotdigital\V3\Models\Contact\Import\FailureDetail;
+use Dotdigital\V3\Models\Contact\Import\FailureDetailCollection;
+use Dotdigital\V3\Models\Contact\Import\Summary;
 use Dotdigital\V3\Models\ContactCollection;
 use PHPUnit\Framework\TestCase;
 

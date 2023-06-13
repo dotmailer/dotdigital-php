@@ -4,9 +4,9 @@ namespace Dotdigital\V3\Models\Contact;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
 use Dotdigital\V3\Models\Contact;
-use Dotdigital\V3\Models\Contact\import\Failure;
-use Dotdigital\V3\Models\Contact\import\FailureCollection;
-use Dotdigital\V3\Models\Contact\import\Summary;
+use Dotdigital\V3\Models\Contact\Import\Failure;
+use Dotdigital\V3\Models\Contact\Import\FailureCollection;
+use Dotdigital\V3\Models\Contact\Import\Summary;
 use Dotdigital\V3\Models\ContactCollection;
 
 class Import extends AbstractSingletonModel

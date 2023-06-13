@@ -1,6 +1,6 @@
 <?php
 
-namespace Dotdigital\V3\Models\Contact\import;
+namespace Dotdigital\V3\Models\Contact\Import;
 
 use Dotdigital\V3\Models\Collection;
 

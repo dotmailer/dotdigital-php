@@ -5,7 +5,7 @@ namespace Dotdigital\Tests\V3\Integration;
 use Dotdigital\AbstractClient;
 use Dotdigital\Tests\V3\Integration\TestCase as DotdigitalTestCase;
 use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
-use Dotdigital\V3\Models\Contact\import\Summary;
+use Dotdigital\V3\Models\Contact\Import\Summary;
 
 class ContactImportReportTest extends DotdigitalTestCase
 {

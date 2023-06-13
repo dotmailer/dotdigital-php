@@ -2,11 +2,9 @@
 
 namespace Dotdigital\V3\Resources;
 
-use Dotdigital\Exception\MissingArgumentException;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\Resources\AbstractResource;
 use Dotdigital\V3\Models\Contact as ContactModel;
-use Dotdigital\V3\Models\Contact\ContactImportnterface;
 use Dotdigital\V3\Models\Contact\Import;
 use Dotdigital\V3\Models\ContactCollection;
 use Http\Client\Exception;
