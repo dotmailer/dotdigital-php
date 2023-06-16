@@ -31,10 +31,29 @@ composer require php-http/curl-client
 # app/index.php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dotdigital = new \Dotdigital\AbstractClient();
+$dotdigital = new \Dotdigital\V3\Client();
 $dotdigital::setApiUser('apiuser-123@apiconnector.com');
 $dotdigital::setApiPassword('');
-$dotdigital::setApiEndpoint('https://r1-api.dotmailer.com');
+$dotdigital::setApiEndpoint('https://r1-api.dotdigital.com');
 
 $accountInfo = $dotdigital->accountInfo->show();
+```
+
+## API versions
+
+Dotdigital began releasing endpoints for a new v3 API in May 2023. Initially these endpoints are in public preview, and only available
+to merchants with certain Dotdigital account configurations.
+
+- [View v3 API specs on Swagger Hub](https://app.swaggerhub.com/search?owner=Dotdigital)
+
+Currently this SDK wraps both the v2 and the v3 APIs, and will be updated to wrap new v3 endpoints as they become available.
+
+### V2
+```
+$dotdigital = new \Dotdigital\V2\Client();
+```
+
+### V3
+```
+$dotdigital = new \Dotdigital\V3\Client();
 ```
