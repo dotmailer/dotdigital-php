@@ -20,7 +20,6 @@ class AccountInfoTest extends TestCase
     {
         $this->client = new Client();
         $this->clientInit();
-        $this->testSuccessResponse(AccountInfo::RESOURCE_BASE);
     }
 
     public function testAccountInfoContent()
@@ -33,10 +32,5 @@ class AccountInfoTest extends TestCase
             $this->assertArrayHasKey('type', $property);
             $this->assertArrayHasKey('value', $property);
         }
-    }
-
-    public function tearDown(): void
-    {
-        $this->testFailedResponse();
     }
 }

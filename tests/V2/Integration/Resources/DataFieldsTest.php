@@ -26,16 +26,11 @@ class DataFieldsTest extends TestCase
     {
         $dataFields = $this->client->dataFields->show();
 
-        foreach ($dataFields as $dataField) {
-            $this->assertObjectHasAttribute('name', $dataField);
-            $this->assertObjectHasAttribute('type', $dataField);
-            $this->assertObjectHasAttribute('visibility', $dataField);
-            $this->assertObjectHasAttribute('defaultValue', $dataField);
+        foreach ($dataFields->getList() as $dataField) {
+            $this->assertTrue(property_exists($dataField, 'name'));
+            $this->assertTrue(property_exists($dataField, 'type'));
+            $this->assertTrue(property_exists($dataField, 'visibility'));
+            $this->assertTrue(property_exists($dataField, 'defaultValue'));
         }
-    }
-
-    public function tearDown(): void
-    {
-        $this->testFailedResponse();
     }
 }

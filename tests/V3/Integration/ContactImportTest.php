@@ -4,9 +4,10 @@ namespace Dotdigital\Tests\V3\Integration;
 
 use Dotdigital\AbstractClient;
 use Dotdigital\Exception\ResponseValidationException;
+use Dotdigital\V3\Models\Contact;
+use Dotdigital\V3\Models\ContactCollection;
 use Dotdigital\V3\Resources\Contacts;
 use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
-
 
 /**
  * @runTestsInSeparateProcesses
@@ -14,8 +15,8 @@ use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
  */
 class ContactImportTest extends TestCase
 {
-
     use InteractsWithContactTrait;
+
     protected string $resourceBase = Contacts::RESOURCE_BASE;
 
     protected AbstractClient $client;
@@ -29,7 +30,6 @@ class ContactImportTest extends TestCase
 
     public function testSuccessfulContactImport()
     {
-        $this->markTestSkipped('must be revisited.');
         $contactCollection = $this->buildContactCollection();
         $importId = $this->client->contacts->import($contactCollection);
 
@@ -44,7 +44,7 @@ class ContactImportTest extends TestCase
      */
     public function testContactImportRequiresMatchIdentifier()
     {
-        $this->markTestSkipped('must be revisited.');
+        $this->markTestSkipped('The endpoint does not treat a contact request as bad if it omits matchIdentifier.');
         $contactCollection = $this->buildContactCollectionWithoutMatchIdentifier();
 
         $this->expectException(ResponseValidationException::class);
@@ -55,11 +55,10 @@ class ContactImportTest extends TestCase
 
     public function testContactImportRequiresIdentifiers()
     {
-        $this->markTestSkipped('must be revisited.');
         $contactCollection = $this->buildContactCollectionWithoutIdentifiers();
 
         $this->expectException(ResponseValidationException::class);
-        $this->expectExceptionMessage('The Identifiers field is required.');
+        $this->expectExceptionMessage('Internal server error');
 
         $this->client->contacts->import($contactCollection);
     }

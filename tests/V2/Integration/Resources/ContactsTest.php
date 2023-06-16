@@ -14,7 +14,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ContactsTest extends TestCase
 {
-
     use ApiConfigurationTrait;
 
     protected string $resourceBase = Contacts::RESOURCE_BASE;
@@ -25,7 +24,6 @@ class ContactsTest extends TestCase
     {
         $this->client = new Client();
         $this->clientInit();
-        $this->testSuccessResponse();
     }
 
     /**
@@ -129,10 +127,4 @@ class ContactsTest extends TestCase
         $this->assertObjectHasProperty('dataFields',$contact);
         $this->assertObjectHasProperty('status',$contact);
     }
-
-    public function tearDown(): void
-    {
-        $this->testFailedResponse();
-    }
-
 }

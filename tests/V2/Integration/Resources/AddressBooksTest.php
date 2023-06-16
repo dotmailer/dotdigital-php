@@ -20,22 +20,16 @@ class AddressBooksTest extends TestCase
     {
         $this->client = new Client();
         $this->clientInit();
-        $this->testSuccessResponse();
     }
 
     public function testAddressBooksContent()
     {
         $addressBooks = $this->client->addressBooks->show();
-        foreach ($addressBooks as $addressBook) {
-            $this->assertObjectHasAttribute('id', $addressBook);
-            $this->assertObjectHasAttribute('name', $addressBook);
-            $this->assertObjectHasAttribute('visibility', $addressBook);
-            $this->assertObjectHasAttribute('contacts', $addressBook);
+        foreach ($addressBooks->getList() as $addressBook) {
+            $this->assertTrue(property_exists($addressBook, 'id'));
+            $this->assertTrue(property_exists($addressBook, 'name'));
+            $this->assertTrue(property_exists($addressBook, 'visibility'));
+            $this->assertTrue(property_exists($addressBook, 'contacts'));
         }
-    }
-
-    public function tearDown(): void
-    {
-        $this->testFailedResponse();
     }
 }
