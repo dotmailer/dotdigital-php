@@ -8,59 +8,49 @@ use Faker\Factory as FakerFactory;
 
 trait InteractsWithContactTrait
 {
-    public const MOCK_LISTS = [];
+    public static $mockLists = [];
 
-    public const MOCK_PREFERENCES = [];
+    public static $mockPreference = [];
 
     protected function buildContactCollection()
     {
         $contact1 = new Contact(
-            [
-                ...(!empty(static::MOCK_LISTS)) ?  ['lists' => static::MOCK_LISTS] : [],
-                'matchIdentifier' => 'email',
-                'identifiers' => [
-                    'email' => 'chaz0959@emailsim.io'
-                ],
-                'dataFields' => [
-                    'FIRST_NAME' => 'Chaz',
-                    'LAST_NAME' => 'Kangaroo',
-                    'COMPANY' => 'Chaz Inc.'
-                ],
-                'consentRecords' => [
-                    [
-                        "text" => "Yes, I would like to receive a monthly newsletter",
-                        "dateTimeConsented" => "2018-01-26T21:29:00",
-                        "url" => "http://www.example.com/signup",
-                        "ipAddress" => "129.168.0.2",
-                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
-                    ]
+            array_merge(
+                (!empty(static::$mockLists)) ? ['lists' => static::$mockLists] : [], 'email', [
+                'email' => 'chaz0959@emailsim.io'
+            ], [
+                'FIRST_NAME' => 'Chaz',
+                'LAST_NAME' => 'Kangaroo',
+                'COMPANY' => 'Chaz Inc.'
+            ], [
+                [
+                    "text" => "Yes, I would like to receive a monthly newsletter",
+                    "dateTimeConsented" => "2018-01-26T21:29:00",
+                    "url" => "http://www.example.com/signup",
+                    "ipAddress" => "129.168.0.2",
+                    "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
                 ]
-            ]
+            ])
         );
         $contact2 = new Contact(
-            [
-                ...(!empty(static::MOCK_LISTS)) ?  ['lists' => static::MOCK_LISTS] : [],
-                ...(!empty(static::MOCK_PREFERENCES)) ?  ['preferences' => static::MOCK_PREFERENCES] : [],
-                'matchIdentifier' => 'mobileNumber',
-                'identifiers' => [
-                    'email' => 'chaz1702@emailsim.io',
-                    'mobileNumber' => '44123123123'
+            array_merge(
+                (!empty(static::$mockLists)) ? ['lists' => static::$mockLists] : [],
+                (!empty(static::$mockPreference)) ? ['preferences' => static::$mockPreference] : [], 'mobileNumber', [
+                'email' => 'chaz1702@emailsim.io',
+                'mobileNumber' => '44123123123'
+            ], [
+                'firstName' => 'Chaznay',
+                'lastName' => 'Kangaroo',
+                'gender' => 'female'
+            ], [
+                'email' => [
+                    'emailType' => 'Html',
+                    'optInType' => 'Single'
                 ],
-                'dataFields' => [
-                    'firstName' => 'Chaznay',
-                    'lastName' => 'Kangaroo',
-                    'gender' => 'female'
-                ],
-                'channelProperties' => [
-                    'email' => [
-                        'emailType' => 'Html',
-                        'optInType' => 'Single'
-                    ],
-                    'sms' => [
-                        'optInType' => 'Single'
-                    ]
+                'sms' => [
+                    'optInType' => 'Single'
                 ]
-            ]
+            ])
         );
         $contact3 = new Contact(
             [
@@ -148,4 +138,38 @@ trait InteractsWithContactTrait
         return $collection;
 
     }
+
+    public function buildPagedContactResponse(int $count):string
+    {
+        $contacts = static::generateContactCollection($count);
+        $payload = [
+            '_items' => $contacts,
+            '_links' => [
+                "self" => [
+                    'marker' => 'string',
+                    'link' => 'string',
+                ],
+                "next" => [
+                    'marker' => 'string',
+                    'link' => 'string',
+                ],
+                "prev" => [
+                    'marker' => 'string',
+                    'link' => 'string',
+                ],
+                "first" => [
+                    'marker' => 'string',
+                    'link' => 'string',
+                ],
+                "last" => [
+                    'marker' => 'string',
+                    'link' => 'string',
+                ],
+            ]
+        ];
+
+        return json_encode($payload);
+
+    }
+
 }

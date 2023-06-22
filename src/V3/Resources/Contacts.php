@@ -7,9 +7,11 @@ use Dotdigital\Resources\AbstractResource;
 use Dotdigital\V3\Models\Contact as ContactModel;
 use Dotdigital\V3\Models\Contact\Import;
 use Dotdigital\V3\Models\ContactCollection;
+use Dotdigital\V3\Utility\Pagination\PageableResourceInterface;
+use Dotdigital\V3\Utility\Pagination\ParameterCollection;
 use Http\Client\Exception;
 
-class Contacts extends AbstractResource
+class Contacts extends AbstractResource implements PageableResourceInterface
 {
     public const RESOURCE_BASE = '/contacts/v3';
 
@@ -94,5 +96,39 @@ class Contacts extends AbstractResource
             sprintf('%s/%s', self::RESOURCE_BASE, 'import'),
             $data
         );
+    }
+
+    /**
+     * @param ParameterCollection $parameterCollection
+     * @return string
+     * @throws Exception
+     */
+    public function getContacts(ParameterCollection $parameterCollection): string
+    {
+        $response = $this->get(
+            sprintf(
+                '%s/%s',
+                self::RESOURCE_BASE,
+                '?' . $parameterCollection->toQueryString()
+            )
+        );
+
+        return $response;
+    }
+
+    /**
+     * @inheritDoc PageableResourceInterface
+     */
+    public function getPaged(ParameterCollection $parameterCollection): string
+    {
+        $response = $this->get(
+            sprintf(
+                '%s/%s',
+                self::RESOURCE_BASE,
+                '?' . $parameterCollection->toQueryString()
+            )
+        );
+
+        return $response;
     }
 }

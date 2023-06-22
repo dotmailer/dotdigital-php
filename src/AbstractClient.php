@@ -16,6 +16,11 @@ use Psr\Http\Message\UriFactoryInterface;
 abstract class AbstractClient
 {
     /**
+     * @var string
+     */
+    public const RESOURCE_BASE = '';
+
+    /**
      * @var ClientBuilder
      */
     protected $clientBuilder;
