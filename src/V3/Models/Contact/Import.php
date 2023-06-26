@@ -9,6 +9,11 @@ use Dotdigital\V3\Models\Contact\Import\FailureCollection;
 use Dotdigital\V3\Models\Contact\Import\Summary;
 use Dotdigital\V3\Models\ContactCollection;
 
+/**
+ * @method string getImportId()
+ * @method string getStatus()
+ * @method Summary getSummary()
+ */
 class Import extends AbstractSingletonModel
 {
     /**
