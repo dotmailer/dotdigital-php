@@ -8,6 +8,11 @@ use Dotdigital\V3\Models\Contact\Identifier;
 class Failure extends AbstractSingletonModel
 {
     /**
+     * @var int
+     */
+    protected int $contactId;
+
+    /**
      * @var Identifier
      */
     protected $identifiers;
