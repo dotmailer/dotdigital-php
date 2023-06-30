@@ -87,6 +87,7 @@ class Contacts extends AbstractResource implements PageableResourceInterface
         bool $resubscribeWithNoChallenge = self::DEFAULT_RESUBSCRIBE_NO_CHALLENGE
     ) {
         $data = [
+            'test' => 'TEST',
             'mergeOption' => $mergeOption,
             'resubscribeWithNoChallenge' => $resubscribeWithNoChallenge,
             'contacts' => $contactCollection->all()
