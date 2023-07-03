@@ -8,6 +8,15 @@ use Psr\Http\Message\ResponseInterface;
 class ResponseMediator
 {
     /**
+     * @var int[] $passableStatusCodes
+     */
+    private static $passableStatusCodes = [
+        200,
+        201,
+        202
+    ];
+
+    /**
      * @param ResponseInterface $response
      *
      * @return string
@@ -15,18 +24,9 @@ class ResponseMediator
      */
     public static function getContent(ResponseInterface $response)
     {
-        $content = $response->getBody()->getContents();
-
-        if (!json_decode($content)) {
-            throw new ResponseValidationException('Cannot decode response.');
+        if (!in_array($response->getStatusCode(), self::$passableStatusCodes)) {
+            throw ResponseValidationException::fromErrorResponse($response);
         }
-
-        $decoded = json_decode($content, true);
-
-        if (isset($decoded['errorCode'])) {
-            throw new ResponseValidationException($decoded['description']);
-        }
-
-        return $content;
+        return $response->getBody()->getContents();
     }
 }

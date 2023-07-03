@@ -5,10 +5,11 @@ namespace Dotdigital\V3;
 use Dotdigital\AbstractClient;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\HttpClient\Message\V3\ResponseMediator;
+use Dotdigital\V3\Resources\Contacts;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * @property \Dotdigital\V3\Resources\Contacts $contacts
+ * @property Contacts $contacts
  */
 class Client extends AbstractClient
 {
