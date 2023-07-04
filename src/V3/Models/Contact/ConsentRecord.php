@@ -8,9 +8,9 @@ use Dotdigital\V3\Models\AbstractSingletonModel;
 class ConsentRecord extends AbstractSingletonModel
 {
     /**
-     * @var string|null
+     * @var string
      */
-    protected ?string $text;
+    protected string $text;
 
     /**
      * @var string
@@ -48,6 +48,18 @@ class ConsentRecord extends AbstractSingletonModel
     {
         $this->dateTimeConsented = $this->validateDateTime($dateTimeConsented);
         return $this;
+    }
+
+    /**
+     * @param string $text
+     * @throws ValidationException
+    */
+    public function setText(string $text): void
+    {
+        if (empty($text)) {
+            throw new ValidationException("Consent text is missing");
+        }
+        $this->text = $text;
     }
 
     /**
