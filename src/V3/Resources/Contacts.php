@@ -14,12 +14,10 @@ use Http\Client\Exception;
 class Contacts extends AbstractResource implements PageableResourceInterface
 {
     public const RESOURCE_BASE = '/contacts/v3';
-
     public const DEFAULT_IMPORT_MERGE_OPTION = 'overwrite';
-    public const DEFAULT_RESUBSCRIBE_NO_CHALLENGE = false;
 
     /**
-     * Post contact given email or mobile number or both..
+     * Post contact given email or mobile number or both.
      *
      * @param ContactModel $contact
      * @return ContactModel
@@ -75,7 +73,6 @@ class Contacts extends AbstractResource implements PageableResourceInterface
     /**
      * @param ContactCollection $contactCollection
      * @param string $mergeOption
-     * @param bool $resubscribeWithNoChallenge
      *
      * @return string
      * @throws Exception
@@ -83,13 +80,10 @@ class Contacts extends AbstractResource implements PageableResourceInterface
      */
     public function import(
         ContactCollection $contactCollection,
-        string $mergeOption = self::DEFAULT_IMPORT_MERGE_OPTION,
-        bool $resubscribeWithNoChallenge = self::DEFAULT_RESUBSCRIBE_NO_CHALLENGE
+        string $mergeOption = self::DEFAULT_IMPORT_MERGE_OPTION
     ) {
         $data = [
-            'test' => 'TEST',
             'mergeOption' => $mergeOption,
-            'resubscribeWithNoChallenge' => $resubscribeWithNoChallenge,
             'contacts' => $contactCollection->all()
         ];
 
