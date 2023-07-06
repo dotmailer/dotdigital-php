@@ -28,11 +28,11 @@ class Parameter extends AbstractSingletonModel
     }
 
     /**
-     * @param string $value
+     * @param string|int $value
      * @return $this
      * @throws ValidationException
      */
-    public function setValue(string $value): Parameter
+    public function setValue($value): Parameter
     {
         switch ($this->field) {
             case '~created':

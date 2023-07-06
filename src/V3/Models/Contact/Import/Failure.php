@@ -15,12 +15,12 @@ class Failure extends AbstractSingletonModel
     /**
      * @var Identifiers
      */
-    protected $identifiers;
+    protected Identifiers $identifiers;
 
     /**
      * @var FailureDetailCollection
      */
-    protected $failures;
+    protected FailureDetailCollection $failures;
 
     /**
      * @param array $failureDetailsData

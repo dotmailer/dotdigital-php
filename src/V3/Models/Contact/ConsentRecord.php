@@ -33,11 +33,6 @@ class ConsentRecord extends AbstractSingletonModel
     protected ?string $userAgent;
 
     /**
-     * @var string|null
-     */
-    protected ?string $dateTimeCreated;
-
-    /**
      * Cast date time to string
      *
      * @param string $dateTimeConsented

@@ -39,7 +39,7 @@ class Contacts extends AbstractResource implements PageableResourceInterface
      * Retrieves the status of a contacts import request and the results if available.
      *
      * @param string $importId
-     * @return \Dotdigital\V3\Models\Contact\Import
+     * @return Import
      * @throws Exception
      * @throws \Exception
      */

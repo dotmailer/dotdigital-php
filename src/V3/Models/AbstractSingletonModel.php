@@ -10,21 +10,21 @@ use JsonSerializable;
 class AbstractSingletonModel implements JsonSerializable
 {
     /**
-     * AbstractModel constructor.
+     * AbstractSingletonModel constructor.
      *
-     * @param string|array<mixed> $content
+     * @param string|array $content
      *
      * @throws \Exception
      */
     public function __construct(
         $content = []
     ) {
-        $this->validate($content);
+        $this->hydrate($content);
     }
 
     /**
      * @param string $property
-     * @param array<mixed> $args
+     * @param array $args
      * @return mixed|null
      */
     public function __call(string $property, array $args)
@@ -43,58 +43,40 @@ class AbstractSingletonModel implements JsonSerializable
     }
 
     /**
-     * @param string|array<mixed> $content
+     * @param array|string $content
      *
-     * @return void
+     * @return $this
      * @throws ValidationException
      */
-    protected function validate($content)
+    protected function hydrate($content): AbstractSingletonModel
     {
         if (is_string($content) && json_decode($content)) {
             $content = json_decode($content, true);
         }
-        $properties = $this->getModelProperties();
-        foreach ($content as $key => $value) {
-            if (!empty($properties)) {
-                if (!in_array($key, array_map(function ($property) {
-                    return $property->name;
-                }, $properties))) {
-                    throw new ValidationException(
-                        sprintf(
-                            'Validation error: the key %s is not a property of %s',
-                            $key,
-                            $this->getModelName()
-                        )
-                    );
-                }
-            }
+
+        foreach ($content as $property => $value) {
             try {
-                if (method_exists($this, $method = 'set' . ucfirst($key))) {
-                    $this->$method($value);
-                } else {
-                    $this->$key = $value;
-                }
+                $this->setProperty($property, $value);
             } catch (\TypeError $e) {
                 throw new ValidationException($e->getMessage());
             }
         }
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @param string $property
+     * @param mixed $value
+     *
+     * @return void
      */
-    private function getModelName()
+    protected function setProperty($property, $value)
     {
-        $model = new \ReflectionClass($this);
-        return $model->getName();
-    }
-
-    /**
-     * @return array<mixed>
-     */
-    protected function getModelProperties()
-    {
-        $model = new \ReflectionClass($this);
-        return $model->getProperties();
+        if (method_exists($this, $method = 'set' . ucfirst($property))) {
+            $this->$method($value);
+        } elseif (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
     }
 }

@@ -9,27 +9,27 @@ class Summary extends AbstractSingletonModel
     /**
      * @var int
      */
-    protected $newContacts;
+    protected int $newContacts;
 
     /**
      * @var int
      */
-    protected $updatedContacts;
+    protected int $updatedContacts;
 
     /**
      * @var int
      */
-    protected $globallySuppressed;
+    protected int $globallySuppressed;
 
     /**
      * @var int
      */
-    protected $invalidEntries;
+    protected int $invalidEntries;
 
     /**
      * @var int
      */
-    protected $duplicateIdentifiers;
+    protected int $duplicateIdentifiers;
 
     /**
      * @param int $newContacts

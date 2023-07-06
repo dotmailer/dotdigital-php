@@ -219,8 +219,7 @@ class Paginator extends AbstractSingletonModel
             );
         }
 
-        $this->validate($this->resource->getPaged($this->parameters));
-        return $this;
+        return $this->hydrate($this->resource->getPaged($this->parameters));
     }
 
     /**
@@ -238,7 +237,7 @@ class Paginator extends AbstractSingletonModel
     public function next(): Paginator
     {
         $this->hydratePaginationStepParameter('next');
-        $this->validate($this->resource->getPaged($this->parameters));
+        $this->hydrate($this->resource->getPaged($this->parameters));
         return $this;
     }
 
@@ -249,7 +248,7 @@ class Paginator extends AbstractSingletonModel
     public function prev(): Paginator
     {
         $this->hydratePaginationStepParameter('prev');
-        $this->validate($this->resource->getPaged($this->parameters));
+        $this->hydrate($this->resource->getPaged($this->parameters));
         return $this;
     }
 
@@ -260,7 +259,7 @@ class Paginator extends AbstractSingletonModel
     public function last(): Paginator
     {
         $this->hydratePaginationStepParameter('last');
-        $this->validate($this->resource->getPaged($this->parameters));
+        $this->hydrate($this->resource->getPaged($this->parameters));
         return $this;
     }
 
@@ -271,7 +270,7 @@ class Paginator extends AbstractSingletonModel
     public function first(): Paginator
     {
         $this->hydratePaginationStepParameter('first');
-        $this->validate($this->resource->getPaged($this->parameters));
+        $this->hydrate($this->resource->getPaged($this->parameters));
         return $this;
     }
 
