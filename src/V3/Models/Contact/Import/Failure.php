@@ -3,7 +3,7 @@
 namespace Dotdigital\V3\Models\Contact\Import;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
-use Dotdigital\V3\Models\Contact\Identifier;
+use Dotdigital\V3\Models\Contact\Identifiers;
 
 class Failure extends AbstractSingletonModel
 {
@@ -13,7 +13,7 @@ class Failure extends AbstractSingletonModel
     protected int $contactId;
 
     /**
-     * @var Identifier
+     * @var Identifiers
      */
     protected $identifiers;
 
@@ -44,7 +44,7 @@ class Failure extends AbstractSingletonModel
      */
     public function setIdentifiers(array $identifiers): void
     {
-        $this->identifiers = new Identifier($identifiers);
+        $this->identifiers = new Identifiers($identifiers);
     }
 
     /**

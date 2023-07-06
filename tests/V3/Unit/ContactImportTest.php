@@ -3,7 +3,6 @@
 namespace V3\Unit;
 
 use Dotdigital\V3\Models\Contact;
-use Dotdigital\V3\Models\Contact\Identifier;
 use Dotdigital\V3\Models\Contact\Identifiers;
 use Dotdigital\V3\Models\Contact\Import;
 use Dotdigital\V3\Models\Contact\Import\Failure;
@@ -171,7 +170,7 @@ class ContactImportTest extends TestCase
         $failures = $import->getFailures();
 
         $this->assertInstanceOf(Failure::class, $failures->first());
-        $this->assertInstanceOf(Identifier::class, $failures->first()->getIdentifiers());
+        $this->assertInstanceOf(Identifiers::class, $failures->first()->getIdentifiers());
         $this->assertInstanceOf(FailureDetailCollection::class, $failures->first()->getFailures());
         $this->assertInstanceOf(FailureDetail::class, $failures->first()->getFailures()->first());
         $this->assertEquals('bob@emailsim@io.com', $failures->first()->getIdentifiers()->getEmail());
