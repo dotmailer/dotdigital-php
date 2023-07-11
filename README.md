@@ -46,7 +46,7 @@ to merchants with certain Dotdigital account configurations.
 
 - [View v3 API specs on Swagger Hub](https://app.swaggerhub.com/search?owner=Dotdigital)
 
-Currently this SDK wraps both the v2 and the v3 APIs, and will be updated to wrap new v3 endpoints as they become available.
+As of version 2.0.0, this SDK wraps both the v2 and the v3 APIs. It will be updated to wrap new v3 endpoints as they become required by our integrations.
 
 ### V2
 ```
