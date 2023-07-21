@@ -43,7 +43,7 @@ abstract class AbstractListModel extends AbstractModel
      */
     protected function validate($content)
     {
-        if (is_string($content) && json_decode($content)) {
+        if (is_string($content)) {
             $content = json_decode($content, true);
         }
         foreach ($content ?? [] as $key => $value) {

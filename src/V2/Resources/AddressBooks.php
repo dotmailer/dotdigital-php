@@ -12,16 +12,24 @@ use Dotdigital\V2\Models\ContactList;
 class AddressBooks extends AbstractResource
 {
     public const RESOURCE_BASE = '/address-books';
+    public const SELECT_LIMIT = 50;
 
     /**
      * Get list of address books.
      *
+     * @param int $skip
+     * @param int $select
      * @return AddressBookList
      * @throws \Http\Client\Exception
      */
-    public function show()
+    public function show(int $skip = 0, int $select = self::SELECT_LIMIT)
     {
-        return new AddressBookList($this->get(self::RESOURCE_BASE));
+        $uriParams = sprintf(
+            '?select=%s&skip=%s',
+            $select,
+            $skip
+        );
+        return new AddressBookList($this->get(self::RESOURCE_BASE . $uriParams));
     }
 
     /**

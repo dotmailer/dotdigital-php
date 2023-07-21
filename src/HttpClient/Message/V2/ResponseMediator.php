@@ -19,7 +19,7 @@ class ResponseMediator
     {
         $content = $response->getBody()->getContents();
 
-        if (!json_decode($content)) {
+        if (null === json_decode($content) || false === json_decode($content)) {
             throw new ResponseValidationException('Cannot decode response.');
         }
 
