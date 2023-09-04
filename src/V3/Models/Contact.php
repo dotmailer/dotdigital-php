@@ -8,6 +8,14 @@ use Dotdigital\V3\Models\Contact\DataField;
 use Dotdigital\V3\Models\Contact\Identifiers;
 use Dotdigital\V3\Models\Contact\Preference;
 
+/**
+ * @method getMatchIdentifier()
+ * @method getChannelProperties()
+ * @method getLists()
+ * @method getDataFields()
+ * @method getConsentRecords()
+ * @method getPreferences()
+ */
 class Contact extends AbstractSingletonModel
 {
     /**
