@@ -71,6 +71,37 @@ class Contacts extends AbstractResource implements PageableResourceInterface
     }
 
     /**
+     * Patch contact by identifier.
+     *
+     * @param string $value
+     * @param ContactModel $contact
+     * @param string $identifier
+     * @param string $mergeOption
+     *
+     * @return ContactModel
+     * @throws Exception
+     */
+    public function patchByIdentifier(
+        string $value,
+        ContactModel $contact,
+        string $identifier = 'email',
+        string $mergeOption = self::DEFAULT_IMPORT_MERGE_OPTION
+    ) {
+        $response = $this->patch(
+            sprintf(
+                '%s/%s/%s?merge-option=%s',
+                self::RESOURCE_BASE,
+                $identifier,
+                $value,
+                $mergeOption
+            ),
+            json_decode(json_encode($contact), true)
+        );
+
+        return new ContactModel($response);
+    }
+
+    /**
      * @param ContactCollection $contactCollection
      * @param string $mergeOption
      *
