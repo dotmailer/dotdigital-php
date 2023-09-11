@@ -1,3 +1,12 @@
+# 2.1.0
+
+### What's new
+- We added a `patchByIdentifier` method to the V3 Contacts resource.
+
+### Improvements
+- We added `skip` and `select` params to the V2 `show()` method for address books (lists).
+- We added `@method` docblocks to selected V3 models.
+
 # 2.0.0
 
 ### What's new
