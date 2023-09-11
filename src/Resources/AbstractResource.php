@@ -81,6 +81,26 @@ abstract class AbstractResource
     }
 
     /**
+     * @param string $path
+     * @param array $body
+     * @param array $headers
+     *
+     * @return string
+     * @throws ResponseValidationException
+     * @throws \Http\Client\Exception
+     */
+    protected function patch(string $path, array $body = [], array $headers = [])
+    {
+        $response = $this->client->getHttpClient()->patch(
+            $path,
+            $headers,
+            json_encode($body)
+        );
+
+        return $this->client->mediateResponse($response);
+    }
+
+    /**
      * Resolve data fields.
      *
      * Resolves data fields array to an accepted format.

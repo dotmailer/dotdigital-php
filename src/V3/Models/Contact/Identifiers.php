@@ -4,6 +4,10 @@ namespace Dotdigital\V3\Models\Contact;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
 
+/**
+ * @method getEmail()
+ * @method getMobileNumber()
+ */
 class Identifiers extends AbstractSingletonModel
 {
     /**
