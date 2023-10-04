@@ -11,6 +11,7 @@ use Dotdigital\HttpClient\Message\V2\ResponseMediator;
  * @property \Dotdigital\V2\Resources\Contacts $contacts
  * @property \Dotdigital\V2\Resources\AddressBooks $addressBooks
  * @property \Dotdigital\V2\Resources\DataFields $dataFields
+ * @property \Dotdigital\V2\Resources\Surveys $surveys
  */
 class Client extends AbstractClient
 {
