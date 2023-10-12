@@ -1,3 +1,8 @@
+# 2.2.0
+
+### What's new
+- We've added a new resource for fetching surveys, pages and forms via the V2 API.
+
 # 2.1.0
 
 ### What's new
