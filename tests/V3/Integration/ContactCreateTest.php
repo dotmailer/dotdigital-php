@@ -6,6 +6,7 @@ use Dotdigital\AbstractClient;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\V3\Models\Contact;
 use Dotdigital\V3\Resources\Contacts;
+use PHPUnit\Framework\Assert;
 
 class ContactCreateTest extends TestCase
 {
@@ -13,11 +14,14 @@ class ContactCreateTest extends TestCase
 
     protected AbstractClient $client;
 
-    public function setUp(): void
+    /** @test */
+    public function testSuccessResponse()
     {
-        parent::setUp();
+        $response = $this->client->getHttpClient()->get($this->resourceBase);
+        Assert::assertEquals(200, $response->getStatusCode());
 
-        $this->testSuccessResponse();
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        Assert::assertEquals("application/json; charset=utf-8", $contentType);
     }
 
     /**
@@ -43,6 +47,18 @@ class ContactCreateTest extends TestCase
         $contact = $this->buildInvalidContact();
         $this->expectException(ResponseValidationException::class);
         $this->client->contacts->create($contact);
+    }
+
+    /** @test */
+    public function testFailedResponse()
+    {
+        $this->client::setApiUser('invalid_ec_user');
+        $this->client::setApiPassword('invalid_ec_password');
+        $response = $this->client->getHttpClient()->get($this->resourceBase);;
+        Assert::assertEquals(401, $response->getStatusCode());
+
+        $contentType = $response->getHeaders()["Content-Type"][0];
+        Assert::assertEquals("application/json; charset=utf-8", $contentType);
     }
 
     private function buildInvalidContact()

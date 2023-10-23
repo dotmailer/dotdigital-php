@@ -21,13 +21,6 @@ class ContactImportTest extends TestCase
 
     protected AbstractClient $client;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->testSuccessResponse();
-    }
-
     public function testSuccessfulContactImport()
     {
         $contactCollection = $this->buildContactCollection();
