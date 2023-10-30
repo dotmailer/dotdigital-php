@@ -27,7 +27,7 @@ class InsightDataCreateUpdateAccountCollectionTest extends TestCase
      */
     public function testIntegrationInsightDataUpsert()
     {
-        $response = $this->client->insightData->createOrUpdateAccountCollection(
+        $response = $this->client->insightData->createOrUpdateAccountCollectionRecord(
             'Integrations',
             'php-app.dev',
             [

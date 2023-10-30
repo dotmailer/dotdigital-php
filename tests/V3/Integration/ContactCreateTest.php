@@ -6,10 +6,13 @@ use Dotdigital\AbstractClient;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\V3\Models\Contact;
 use Dotdigital\V3\Resources\Contacts;
+use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
 use PHPUnit\Framework\Assert;
 
 class ContactCreateTest extends TestCase
 {
+    use InteractsWithContactTrait;
+
     protected string $resourceBase = Contacts::RESOURCE_BASE;
 
     protected AbstractClient $client;
@@ -59,54 +62,5 @@ class ContactCreateTest extends TestCase
 
         $contentType = $response->getHeaders()["Content-Type"][0];
         Assert::assertEquals("application/json; charset=utf-8", $contentType);
-    }
-
-    private function buildInvalidContact()
-    {
-        return new Contact(
-            [
-                'matchIdentifier' => 'email',
-                'dataFields' => [
-                    'firstName' => 'Chaznay',
-                    'lastName' => 'Kangaroo',
-                    'gender' => 'female'
-                ],
-                'consentRecords' => [
-                    [
-                        "text" => "Yes, I would like to receive a monthly newsletter",
-                        "dateTimeConsented" => "2018-01-26T21:29:00",
-                        "url" => "http://www.example.com/signup",
-                        "ipAddress" => "129.168.0.2",
-                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
-                    ]
-                ]
-            ]
-        );
-    }
-
-    private function buildContact()
-    {
-        return new Contact(
-            [
-                'matchIdentifier' => 'email',
-                'identifiers' => [
-                    'email' => bin2hex(random_bytes(16)) . '@emailsim.io'
-                ],
-                'dataFields' => [
-                    'firstName' => 'Chaznay',
-                    'lastName' => 'Kangaroo',
-                    'gender' => 'female'
-                ],
-                'consentRecords' => [
-                    [
-                        "text" => "Yes, I would like to receive a monthly newsletter",
-                        "dateTimeConsented" => "2018-01-26T21:29:00",
-                        "url" => "http://www.example.com/signup",
-                        "ipAddress" => "129.168.0.2",
-                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
-                    ]
-                ]
-            ]
-        );
     }
 }
