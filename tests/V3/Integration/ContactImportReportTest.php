@@ -21,12 +21,6 @@ class ContactImportReportTest extends DotdigitalTestCase
      */
     protected AbstractClient $client;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->testSuccessResponse();
-    }
-
     public function testSuccessfulImport()
     {
         $importId = $this->client->contacts->import($this->generateContactCollection(200));

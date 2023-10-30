@@ -1,3 +1,8 @@
+# 2.3.0
+
+### What's new
+- We’ve added a new V3 InsightData resource, with two PUT methods for bulk import and single upsert.
+
 # 2.2.0
 
 ### What's new
