@@ -30,22 +30,6 @@ class ContactImportTest extends TestCase
         return $importId;
     }
 
-    /**
-     * SNAG: currently omitting matchidentifier does not return an errorCode
-     *
-     * @return void
-     */
-    public function testContactImportRequiresMatchIdentifier()
-    {
-        $this->markTestSkipped('The endpoint does not treat a contact request as bad if it omits matchIdentifier.');
-        $contactCollection = $this->buildContactCollectionWithoutMatchIdentifier();
-
-        $this->expectException(ResponseValidationException::class);
-        $this->expectExceptionMessage('The Matchidentifiers field is required.');
-
-        $this->client->contacts->import($contactCollection);
-    }
-
     public function testContactImportRequiresIdentifiers()
     {
         $contactCollection = $this->buildContactCollectionWithoutIdentifiers();
