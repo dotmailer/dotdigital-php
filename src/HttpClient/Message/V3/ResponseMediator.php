@@ -13,7 +13,8 @@ class ResponseMediator
     private static $passableStatusCodes = [
         200,
         201,
-        202
+        202,
+        204
     ];
 
     /**

@@ -53,13 +53,16 @@ class Link extends AbstractSingletonModel
      */
     public function getParams(): array
     {
-        parse_str(
-            parse_url(
-                $this->link,
-                PHP_URL_QUERY
-            ),
-            $params
+        $queryString = parse_url(
+            $this->link,
+            PHP_URL_QUERY
         );
+
+        if (!is_string($queryString)) {
+            return [];
+        }
+
+        parse_str($queryString, $params);
         return $params;
     }
 }

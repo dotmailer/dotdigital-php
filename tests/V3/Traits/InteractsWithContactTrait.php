@@ -10,47 +10,46 @@ trait InteractsWithContactTrait
 {
     public static $mockLists = [];
 
-    public static $mockPreference = [];
+    public static $mockPreferences = [];
 
     protected function buildContactCollection()
     {
         $contact1 = new Contact(
-            array_merge(
-                (!empty(static::$mockLists)) ? ['lists' => static::$mockLists] : [], 'email', [
-                'email' => 'chaz0959@emailsim.io'
-            ], [
-                'FIRST_NAME' => 'Chaz',
-                'LAST_NAME' => 'Kangaroo',
-                'COMPANY' => 'Chaz Inc.'
-            ], [
-                [
-                    "text" => "Yes, I would like to receive a monthly newsletter",
-                    "dateTimeConsented" => "2018-01-26T21:29:00",
-                    "url" => "http://www.example.com/signup",
-                    "ipAddress" => "129.168.0.2",
-                    "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+            [
+                ...(!empty(static::$mockLists)) ?  ['lists' => static::$mockLists] : [],
+                'matchIdentifier' => 'email',
+                'identifiers' => [
+                    'email' => 'chaz0959@emailsim.io'
+                ],
+                'dataFields' => [
+                    'FIRST_NAME' => 'Chaz',
+                    'LAST_NAME' => 'Kangaroo',
+                    'COMPANY' => 'Chaz Inc.'
+                ],
+                'consentRecords' => [
+                    [
+                        "text" => "Yes, I would like to receive a monthly newsletter",
+                        "dateTimeConsented" => "2018-01-26T21:29:00",
+                        "url" => "http://www.example.com/signup",
+                        "ipAddress" => "129.168.0.2",
+                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+                    ]
                 ]
-            ])
+            ]
         );
         $contact2 = new Contact(
-            array_merge(
-                (!empty(static::$mockLists)) ? ['lists' => static::$mockLists] : [],
-                (!empty(static::$mockPreference)) ? ['preferences' => static::$mockPreference] : [], 'mobileNumber', [
-                'email' => 'chaz1702@emailsim.io',
-                'mobileNumber' => '44123123123'
-            ], [
-                'firstName' => 'Chaznay',
-                'lastName' => 'Kangaroo',
-                'gender' => 'female'
-            ], [
-                'email' => [
-                    'emailType' => 'Html',
-                    'optInType' => 'Single'
+            [
+                ...(!empty(static::$mockLists)) ?  ['lists' => static::$mockLists] : [],
+                ...(!empty(static::$mockPreferences)) ?  ['preferences' => static::$mockPreferences] : [],
+                'matchIdentifier' => 'mobileNumber',
+                'identifiers' => [
+                    'email' => 'chaz1702@emailsim.io',
+                    'mobileNumber' => '44123123123'
                 ],
                 'sms' => [
                     'optInType' => 'Single'
                 ]
-            ])
+            ]
         );
         $contact3 = new Contact(
             [
@@ -136,7 +135,63 @@ trait InteractsWithContactTrait
         );
 
         return $collection;
+    }
 
+    /**
+     * @return Contact
+     * @throws \Exception
+     */
+    private function buildContact()
+    {
+        return new Contact(
+            [
+                'matchIdentifier' => 'email',
+                'identifiers' => [
+                    'email' => bin2hex(random_bytes(16)) . '@emailsim.io'
+                ],
+                'dataFields' => [
+                    'firstName' => 'Chaznay',
+                    'lastName' => 'Kangaroo',
+                    'gender' => 'female'
+                ],
+                'consentRecords' => [
+                    [
+                        "text" => "Yes, I would like to receive a monthly newsletter",
+                        "dateTimeConsented" => "2018-01-26T21:29:00",
+                        "url" => "http://www.example.com/signup",
+                        "ipAddress" => "129.168.0.2",
+                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+                    ]
+                ]
+            ]
+        );
+    }
+
+    /**
+     * @return Contact
+     * @throws \Exception
+     */
+    private function buildInvalidContact()
+    {
+        return new Contact(
+            [
+                'matchIdentifier' => 'email',
+                'dataFields' => [
+                    'firstName' => 'Chaznay',
+                    'lastName' => 'Kangaroo',
+                    'gender' => 'female'
+                ],
+                'consentRecords' => [
+                    [
+                        "text" => "Yes, I would like to receive a monthly newsletter",
+                        "dateTimeConsented" => "2018-01-26T21:29:00",
+                        "url" => "http://www.example.com/signup",
+                        "ipAddress" => "129.168.0.2",
+                        "userAgent" => "Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+                    ]
+                ]
+            ]
+        );
     }
 
     public function buildPagedContactResponse(int $count):string
