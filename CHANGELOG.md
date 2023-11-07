@@ -1,3 +1,8 @@
+# 2.3.1
+
+### Improvements
+- It’s now possible to call `$contact→setDatafields()` passing an empty array.
+
 # 2.3.0
 
 ### What's new

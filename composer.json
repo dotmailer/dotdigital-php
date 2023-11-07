@@ -1,7 +1,7 @@
 {
     "name": "dotdigital/dotdigital-php",
     "description": "Dotdigital PHP Library",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "license": "MIT",
     "autoload": {
         "psr-4": {

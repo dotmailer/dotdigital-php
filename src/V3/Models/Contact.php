@@ -103,13 +103,13 @@ class Contact extends AbstractSingletonModel
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array $data
      * @return void
      * @throws \Exception
      */
     public function setDataFields($data)
     {
-        $dataFieldsCollection = new DataFieldCollection();
+        $dataFieldsCollection = empty($data) ? null : new DataFieldCollection();
         foreach ($data as $key => $value) {
             $dataField = new DataField($key, $value);
             $dataFieldsCollection->add($dataField);
