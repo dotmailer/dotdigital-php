@@ -15,6 +15,7 @@ use Dotdigital\V3\Models\Contact\Preference;
  * @method getDataFields()
  * @method getConsentRecords()
  * @method getPreferences()
+ * @method getStatus()
  */
 class Contact extends AbstractSingletonModel
 {
