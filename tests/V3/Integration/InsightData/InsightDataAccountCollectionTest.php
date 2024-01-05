@@ -14,7 +14,7 @@ use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
  * @runTestsInSeparateProcesses
  * @coversDefaultClass InsightData
  */
-class InsightDataCreateUpdateAccountCollectionTest extends TestCase
+class InsightDataAccountCollectionTest extends TestCase
 {
     use InteractsWithContactTrait;
 
