@@ -1,12 +1,20 @@
+# 2.4.0
+
+### What's new
+- We added a method to update or create contact insight data.
+
+### Improvements
+- We added an annotation for the `getStatus()` method in the Contact model, to fix PHPStan errors.
+
 # 2.3.1
 
 ### Improvements
-- It’s now possible to call `$contact→setDatafields()` passing an empty array.
+- It's now possible to call `$contact→setDatafields()` passing an empty array.
 
 # 2.3.0
 
 ### What's new
-- We’ve added a new V3 InsightData resource, with two PUT methods for bulk import and single upsert.
+- We've added a new V3 InsightData resource, with two PUT methods for bulk import and single upsert.
 
 # 2.2.0
 
