@@ -7,7 +7,7 @@ use Dotdigital\Tests\V3\Integration\TestCase;
 use Dotdigital\Tests\V3\Traits\InteractsWithContactTrait;
 use Dotdigital\V3\Resources\InsightData;
 
-class InsightDataTest extends TestCase
+class InsightDataImportTest extends TestCase
 {
     use InteractsWithContactTrait;
 
