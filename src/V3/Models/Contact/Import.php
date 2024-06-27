@@ -13,6 +13,7 @@ use Dotdigital\V3\Models\ContactCollection;
  * @method string getImportId()
  * @method string getStatus()
  * @method Summary getSummary()
+ * @method FailureCollection getFailures()
  */
 class Import extends AbstractSingletonModel
 {
