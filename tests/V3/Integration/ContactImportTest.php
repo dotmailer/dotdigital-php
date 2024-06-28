@@ -35,7 +35,7 @@ class ContactImportTest extends TestCase
         $contactCollection = $this->buildContactCollectionWithoutIdentifiers();
 
         $this->expectException(ResponseValidationException::class);
-        $this->expectExceptionMessage('Internal server error');
+        $this->expectExceptionMessage('contacts:badRequest - The Identifiers field is required');
 
         $this->client->contacts->import($contactCollection);
     }

@@ -80,9 +80,9 @@ class Survey extends AbstractSingletonModel
     protected ?string $respondentNotificationType;
 
     /**
-     * @var string|null
+     * @var int|null
      */
-    protected ?string $respondentNotificationCampaignId;
+    protected ?int $respondentNotificationCampaignId;
 
     /**
      * @var bool
@@ -299,9 +299,9 @@ class Survey extends AbstractSingletonModel
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getRespondentNotificationCampaignId(): ?string
+    public function getRespondentNotificationCampaignId(): ?int
     {
         return $this->respondentNotificationCampaignId;
     }
