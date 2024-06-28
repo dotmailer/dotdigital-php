@@ -1,3 +1,8 @@
+# 2.4.1
+
+### Bug fixes
+- The `$respondentNotificationCampaignId` property of the Survey model was changed from string to int.
+
 # 2.4.0
 
 ### What's new
