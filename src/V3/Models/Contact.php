@@ -85,7 +85,7 @@ class Contact extends AbstractSingletonModel
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array|Identifiers $data
      * @return void
      * @throws \Exception
      */
@@ -156,11 +156,11 @@ class Contact extends AbstractSingletonModel
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array $data
      * @return void
      * @throws \Exception
      */
-    public function setPreferences($data)
+    public function setPreferences(array $data)
     {
         $preferenceCollection = new PreferenceCollection();
         foreach ($data as $array) {

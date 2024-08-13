@@ -23,11 +23,11 @@ class Record extends AbstractSingletonModel
     protected array $json;
 
     /**
-     * @param array $data
+     * @param array|ContactIdentity $data
      * @return void
      * @throws \Exception
      */
-    public function setContactIdentity(array $data)
+    public function setContactIdentity($data)
     {
         $this->contactIdentity = new ContactIdentity($data);
     }

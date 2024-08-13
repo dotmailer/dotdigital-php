@@ -25,4 +25,26 @@ class Preference extends AbstractSingletonModel
      * @var bool|null
      */
     protected ?bool $isOptedIn;
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId(int $id): Preference
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @param bool $isOptedIn
+     *
+     * @return self
+     */
+    public function setIsOptedIn(bool $isOptedIn): Preference
+    {
+        $this->isOptedIn = $isOptedIn;
+        return $this;
+    }
 }
