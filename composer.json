@@ -14,13 +14,13 @@
         }
     },
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.2",
         "ext-json": "*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
         "php-http/client-common": "^2.4",
         "php-http/discovery": "^1.15.0",
-        "nesbot/carbon": "^2.67"
+        "nesbot/carbon": "^3.8"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
