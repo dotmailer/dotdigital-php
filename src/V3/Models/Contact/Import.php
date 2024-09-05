@@ -2,36 +2,17 @@
 
 namespace Dotdigital\V3\Models\Contact;
 
-use Dotdigital\V3\Models\AbstractSingletonModel;
+use Dotdigital\V3\Models\AbstractImportModel;
 use Dotdigital\V3\Models\Contact;
 use Dotdigital\V3\Models\Contact\Import\Failure;
-use Dotdigital\V3\Models\Contact\Import\FailureCollection;
 use Dotdigital\V3\Models\Contact\Import\Summary;
 use Dotdigital\V3\Models\ContactCollection;
+use Dotdigital\V3\Models\Import\Failure\FailureCollection;
+use Dotdigital\V3\Models\Import\ImportInterface;
+use Dotdigital\V3\Models\Import\SummaryInterface;
 
-/**
- * @method string getImportId()
- * @method string getStatus()
- * @method Summary getSummary()
- * @method FailureCollection getFailures()
- */
-class Import extends AbstractSingletonModel
+class Import extends AbstractImportModel implements ImportInterface
 {
-    /**
-     * @var string
-     */
-    protected $importId;
-
-    /**
-     * @var string
-     */
-    protected $status;
-
-    /**
-     * @var Summary
-     */
-    protected $summary;
-
     /**
      * @var ContactCollection
      */
@@ -41,11 +22,6 @@ class Import extends AbstractSingletonModel
      * @var ContactCollection
      */
     protected $updated;
-
-    /**
-     * @var FailureCollection
-     */
-    protected $failures;
 
     /**
      * @param array $contactsData
@@ -63,11 +39,9 @@ class Import extends AbstractSingletonModel
     }
 
     /**
-     * @param array $failuresData
-     * @return FailureCollection
-     * @throws \Exception
+     * @inheirtDoc
      */
-    private function createFailures(array $failuresData): FailureCollection
+    public function createFailures(array $failuresData): FailureCollection
     {
         $failures = new FailureCollection();
         foreach ($failuresData as $failureData) {
@@ -78,27 +52,7 @@ class Import extends AbstractSingletonModel
     }
 
     /**
-     * @param string $importId
-     * @return void
-     */
-    public function setImportId(string $importId): void
-    {
-        $this->importId = $importId;
-    }
-
-    /**
-     * @param string $status
-     * @return void
-     */
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @param array $summary
-     * @return void
-     * @throws \Exception
+     * @inheirtDoc
      */
     public function setSummary(array $summary): void
     {
@@ -126,12 +80,34 @@ class Import extends AbstractSingletonModel
     }
 
     /**
-     * @param array $failures
-     * @return void
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function setFailures(array $failures): void
+    public function getSummary(): SummaryInterface
     {
-        $this->failures = $this->createFailures($failures);
+        return $this->summary;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFailures(): ?FailureCollection
+    {
+        return $this->failures;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getImportId(): string
+    {
+        return $this->importId;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }

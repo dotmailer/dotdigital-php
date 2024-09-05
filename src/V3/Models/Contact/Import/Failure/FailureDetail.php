@@ -1,6 +1,6 @@
 <?php
 
-namespace Dotdigital\V3\Models\Contact\Import;
+namespace Dotdigital\V3\Models\Contact\Import\Failure;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
 

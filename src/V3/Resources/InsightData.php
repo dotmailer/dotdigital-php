@@ -7,6 +7,7 @@ namespace Dotdigital\V3\Resources;
 use Dotdigital\Exception\ResponseValidationException;
 use Dotdigital\Resources\AbstractResource;
 use Dotdigital\V3\Models\InsightData as InsightDataModel;
+use Dotdigital\V3\Models\InsightData\Import;
 use Http\Client\Exception;
 
 class InsightData extends AbstractResource
@@ -83,5 +84,26 @@ class InsightData extends AbstractResource
             ),
             $insightData
         );
+    }
+
+    /**
+     * Retrieves the status of an insight data import request and the results if available.
+     *
+     * @param string $importId
+     * @return Import
+     * @throws Exception
+     * @throws \Exception
+     */
+    public function getImportById(string $importId): Import
+    {
+        $response = $this->get(
+            sprintf(
+                '%s/%s/%s',
+                self::RESOURCE_BASE,
+                'import',
+                $importId,
+            )
+        );
+        return new Import($response);
     }
 }

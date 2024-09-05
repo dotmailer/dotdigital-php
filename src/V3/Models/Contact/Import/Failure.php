@@ -4,8 +4,11 @@ namespace Dotdigital\V3\Models\Contact\Import;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
 use Dotdigital\V3\Models\Contact\Identifiers;
+use Dotdigital\V3\Models\Contact\Import\Failure\FailureDetail;
+use Dotdigital\V3\Models\Contact\Import\Failure\FailureDetailCollection;
+use Dotdigital\V3\Models\Import\FailureInterface;
 
-class Failure extends AbstractSingletonModel
+class Failure extends AbstractSingletonModel implements FailureInterface
 {
     /**
      * @var int
@@ -27,7 +30,7 @@ class Failure extends AbstractSingletonModel
      * @return FailureDetailCollection
      * @throws \Exception
      */
-    private function createFailureDetails(array $failureDetailsData): FailureDetailCollection
+    public function createFailureDetails(array $failureDetailsData): FailureDetailCollection
     {
         $failureDetails = new FailureDetailCollection();
         foreach ($failureDetailsData as $failureDetailData) {

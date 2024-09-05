@@ -3,7 +3,7 @@
 namespace Dotdigital\Tests\V3\Unit\Models\InsightData;
 
 use Dotdigital\V3\Models\InsightData;
-use Dotdigital\V3\Models\InsightData\ContactIdentity;
+use Dotdigital\V3\Models\InsightData\InsightDataIdentity;
 use PHPUnit\Framework\TestCase;
 
 class RecordTest extends TestCase
@@ -38,7 +38,7 @@ class RecordTest extends TestCase
     public function testRecordContactIdentityCanBeSetWithAHydratedObject()
     {
         $data = new InsightData();
-        $contactIdentity = new ContactIdentity([
+        $contactIdentity = new InsightDataIdentity([
             'identifier' => 'email',
             'value' => 'chaz@emailsim.io'
         ]);

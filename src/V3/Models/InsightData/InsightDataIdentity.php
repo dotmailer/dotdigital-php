@@ -4,15 +4,15 @@ namespace Dotdigital\V3\Models\InsightData;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
 
-class ContactIdentity extends AbstractSingletonModel
+class InsightDataIdentity extends AbstractSingletonModel
 {
     /**
      * @var string
      */
-    protected string $identifier;
+    protected $identifier;
 
     /**
      * @var string
      */
-    protected string $value;
+    protected $value;
 }
