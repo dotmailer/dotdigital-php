@@ -65,9 +65,9 @@ class ConsentRecord extends AbstractSingletonModel
     private function validateDateTime(string $value): string
     {
         try {
-            $value = \Carbon\Carbon::parse($value)->toIso8601String();
+            new \DateTime($value);
         } catch (\Exception $e) {
-            throw new ValidationException("Invalid date format for dateTimeConsented field, expected ISO8601 format");
+            throw new ValidationException("Invalid date format for dateTimeConsented field");
         }
 
         return $value;
