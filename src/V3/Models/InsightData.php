@@ -30,11 +30,11 @@ class InsightData extends AbstractSingletonModel
     protected RecordsCollection $records;
 
     /**
-     * @param $data
+     * @param array $data
      * @return void
      * @throws \Exception
      */
-    public function setRecords($data)
+    public function setRecords(array $data)
     {
         $recordsCollection = new RecordsCollection();
         foreach ($data as $array) {

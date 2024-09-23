@@ -3,14 +3,14 @@
 namespace Dotdigital\V3\Models\InsightData;
 
 use Dotdigital\V3\Models\AbstractSingletonModel;
-use Dotdigital\V3\Models\InsightData\ContactIdentity;
+use Dotdigital\V3\Models\InsightData\InsightDataIdentity;
 
 class Record extends AbstractSingletonModel
 {
     /**
-     * @var ContactIdentity|null
+     * @var InsightDataIdentity|null
      */
-    protected ?ContactIdentity $contactIdentity;
+    protected ?InsightDataIdentity $contactIdentity;
 
     /**
      * @var string
@@ -23,12 +23,12 @@ class Record extends AbstractSingletonModel
     protected array $json;
 
     /**
-     * @param array $data
+     * @param array|InsightDataIdentity $data
      * @return void
      * @throws \Exception
      */
-    public function setContactIdentity(array $data)
+    public function setContactIdentity($data)
     {
-        $this->contactIdentity = new ContactIdentity($data);
+        $this->contactIdentity = new InsightDataIdentity($data);
     }
 }

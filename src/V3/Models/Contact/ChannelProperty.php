@@ -19,23 +19,23 @@ class ChannelProperty extends AbstractSingletonModel
     protected ?SmsChannelProperty $sms;
 
     /**
-     * @param array $property
+     * @param array|EmailChannelProperty $property
      *
      * @return void
      * @throws \Exception
      */
-    public function setEmail(array $property)
+    public function setEmail($property)
     {
         $this->email = new EmailChannelProperty($property);
     }
 
     /**
-     * @param array $property
+     * @param array|SmsChannelProperty $property
      *
      * @return void
      * @throws \Exception
      */
-    public function setSms(array $property)
+    public function setSms($property)
     {
         $this->sms = new SmsChannelProperty($property);
     }

@@ -1,4 +1,15 @@
+# 2.5.0
+
+### Improvements
+- The SDK now supports checking V3 InsightData imports by id.
+- We added setter methods for Contact ChannelProperty models.
+- Some nested model type requirements have been relaxed.
+- nesbot/carbon is removed in favour of native DateTime.
+
 # 2.4.1
+
+### Improvements
+- We added an annotation to the Import model for a FailureCollection.
 
 ### Bug fixes
 - The `$respondentNotificationCampaignId` property of the Survey model was changed from string to int.

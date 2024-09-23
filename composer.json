@@ -1,7 +1,7 @@
 {
     "name": "dotdigital/dotdigital-php",
     "description": "Dotdigital PHP Library",
-    "version": "2.4.1",
+    "version": "2.5.0",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -19,8 +19,7 @@
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
         "php-http/client-common": "^2.4",
-        "php-http/discovery": "^1.15.0",
-        "nesbot/carbon": "^2.67"
+        "php-http/discovery": "^1.15.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",

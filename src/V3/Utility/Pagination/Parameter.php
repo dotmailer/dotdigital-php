@@ -86,11 +86,10 @@ class Parameter extends AbstractSingletonModel
     private function validateDateTime(string $value): string
     {
         try {
-            $value = \Carbon\Carbon::parse(
-                str_replace('gte::', '', $value)
-            )->toIso8601String();
+            $value = str_replace('gte::', '', $value);
+            new \DateTime($value);
         } catch (\Exception $e) {
-            throw new ValidationException("Invalid date format for {$this->field} field, expected ISO8601 format");
+            throw new ValidationException("Invalid date format for {$this->field} field");
         }
 
         return $value;

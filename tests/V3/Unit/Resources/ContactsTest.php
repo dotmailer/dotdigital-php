@@ -1,7 +1,8 @@
 <?php
 
-namespace Dotdigital\Tests\V3\Unit;
+namespace Dotdigital\Tests\V3\Unit\Resources;
 
+use Dotdigital\Tests\V3\Unit\TestCase;
 use Dotdigital\V3\Models\Contact;
 use Dotdigital\V3\Models\ContactCollection;
 use Dotdigital\V3\Resources\Contacts;
