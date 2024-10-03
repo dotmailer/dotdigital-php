@@ -3,31 +3,29 @@
 namespace Dotdigital\HttpClient\Message\V3;
 
 use Dotdigital\Exception\ResponseValidationException;
+use Dotdigital\Exception\TooManyRequestsException;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseMediator
 {
     /**
-     * @var int[] $passableStatusCodes
-     */
-    private static $passableStatusCodes = [
-        200,
-        201,
-        202,
-        204
-    ];
-
-    /**
      * @param ResponseInterface $response
      *
      * @return string
-     * @throws ResponseValidationException
+     * @throws ResponseValidationException|TooManyRequestsException
      */
     public static function getContent(ResponseInterface $response)
     {
-        if (!in_array($response->getStatusCode(), self::$passableStatusCodes)) {
-            throw ResponseValidationException::fromErrorResponse($response);
+        switch ($response->getStatusCode()) {
+            case 200:
+            case 201:
+            case 202:
+            case 204:
+                return $response->getBody()->getContents();
+            case 429:
+                throw TooManyRequestsException::fromErrorResponse($response);
+            default:
+                throw ResponseValidationException::fromErrorResponse($response);
         }
-        return $response->getBody()->getContents();
     }
 }
