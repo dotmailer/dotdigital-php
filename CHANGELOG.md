@@ -1,3 +1,11 @@
+# 2.6.0
+
+### What's new
+- Responses with a 429 (Too Many Requests) error code now trigger a specific exception with properties exposing additional information (the call scope, rate limit and time to retry).
+
+### Bug fixes
+- `Contact::setDataFields()` no longer breaks if passed an empty array.
+
 # 2.5.0
 
 ### Improvements

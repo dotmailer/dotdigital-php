@@ -39,7 +39,7 @@ class Import extends AbstractImportModel implements ImportInterface
     }
 
     /**
-     * @inheirtDoc
+     * @inheritDoc
      */
     public function createFailures(array $failuresData): FailureCollection
     {
@@ -52,7 +52,7 @@ class Import extends AbstractImportModel implements ImportInterface
     }
 
     /**
-     * @inheirtDoc
+     * @inheritDoc
      */
     public function setSummary(array $summary): void
     {
@@ -82,7 +82,7 @@ class Import extends AbstractImportModel implements ImportInterface
     /**
      * @inheritDoc
      */
-    public function getSummary(): SummaryInterface
+    public function getSummary(): ?SummaryInterface
     {
         return $this->summary;
     }

@@ -110,7 +110,10 @@ class Contact extends AbstractSingletonModel
      */
     public function setDataFields($data)
     {
-        $dataFieldsCollection = empty($data) ? null : new DataFieldCollection();
+        if (empty($data)) {
+            return;
+        }
+        $dataFieldsCollection = new DataFieldCollection();
         foreach ($data as $key => $value) {
             $dataField = new DataField($key, $value);
             $dataFieldsCollection->add($dataField);

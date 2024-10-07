@@ -37,9 +37,9 @@ interface ImportInterface
     public function setFailures(array $failures): void;
 
     /**
-     * @return SummaryInterface
+     * @return SummaryInterface|null
      */
-    public function getSummary(): SummaryInterface;
+    public function getSummary(): ?SummaryInterface;
 
     /**
      * @return string

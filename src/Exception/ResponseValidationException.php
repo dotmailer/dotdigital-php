@@ -68,7 +68,7 @@ class ResponseValidationException extends \ErrorException implements ExceptionIn
         if (json_last_error() !== JSON_ERROR_NONE) {
             $decoded = [
                 'description' => sprintf('Error decoding response - %s', json_last_error_msg()),
-                'errorCode' => 'Error Unknown',
+                'errorCode' => $this->getCode() ?: 'Error Unknown',
                 'details' => [],
            ];
         }
