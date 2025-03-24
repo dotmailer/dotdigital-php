@@ -1,3 +1,8 @@
+# 2.6.1
+
+### Improvements
+- We updated our code for compatibility with PHP 8.4.
+
 # 2.6.0
 
 ### What's new
