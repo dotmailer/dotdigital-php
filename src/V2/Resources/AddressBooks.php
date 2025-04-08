@@ -44,7 +44,7 @@ class AddressBooks extends AbstractResource
      * @throws \Dotdigital\Exception\ResponseValidationException
      * @throws \Http\Client\Exception
      */
-    public function addContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], string $optInType = null, string $emailType = null)
+    public function addContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], ?string $optInType = null, ?string $emailType = null)
     {
         $response = $this->post(
             sprintf(
@@ -73,7 +73,7 @@ class AddressBooks extends AbstractResource
      * @throws \Dotdigital\Exception\ResponseValidationException
      * @throws \Http\Client\Exception
      */
-    public function resubscribeContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], string $preferredLocale = null, string $returnUrlToUseIfChallenged = null)
+    public function resubscribeContactToAddressBook(int $addressBookId, string $email, array $dataFields = [], ?string $preferredLocale = null, ?string $returnUrlToUseIfChallenged = null)
     {
         $response = $this->post(
             sprintf(

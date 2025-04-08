@@ -4,6 +4,7 @@ namespace Dotdigital\Tests;
 
 use Dotdigital\AbstractClient;
 use PHPUnit\Framework\Assert;
+use Symfony\Component\Dotenv\Dotenv;
 
 trait ApiConfigurationTrait
 {
@@ -14,8 +15,11 @@ trait ApiConfigurationTrait
 
     protected function clientInit(): void
     {
-        $this->client::setApiUser('demo@apiconnector.com');
-        $this->client::setApiPassword('demo');
-        $this->client::setApiEndpoint('https://r1-api.dotmailer.com');
+        $dotenv = new Dotenv();
+        $dotenv->load(__DIR__.'/.env');
+
+        $this->client::setApiUser($_ENV['DOTDIGITAL_API_USER']);
+        $this->client::setApiPassword($_ENV['DOTDIGITAL_API_PASSWORD']);
+        $this->client::setApiEndpoint($_ENV['DOTDIGITAL_API_ENDPOINT']);
     }
 }
