@@ -46,8 +46,8 @@ abstract class AbstractClient
     protected static $apiPassword;
 
     public function __construct(
-        ClientBuilder $clientBuilder = null,
-        UriFactoryInterface $uriFactory = null
+        ?ClientBuilder $clientBuilder = null,
+        ?UriFactoryInterface $uriFactory = null
     ) {
         $this->clientBuilder = $clientBuilder ?: new ClientBuilder();
         $this->uriFactory = $uriFactory ?: Psr17FactoryDiscovery::findUriFactory();

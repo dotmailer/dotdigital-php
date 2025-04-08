@@ -17,7 +17,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $dotenv = new Dotenv();
-        $dotenv->load(__DIR__.'/.env');
+        $dotenv->load(__DIR__.'/../../.env');
 
         $this->client = new Client();
         $this->clientInit();
