@@ -11,6 +11,10 @@ use Dotdigital\V3\Models\Import\Failure\FailureCollection;
 use Dotdigital\V3\Models\Import\ImportInterface;
 use Dotdigital\V3\Models\Import\SummaryInterface;
 
+/**
+ * @method getCreated()
+ * @method getUpdated()
+ */
 class Import extends AbstractImportModel implements ImportInterface
 {
     /**

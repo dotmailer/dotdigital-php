@@ -1,3 +1,8 @@
+# 2.6.2
+
+### Improvements
+- We added annotations for get methods in the Contact\Import model, to fix PHPStan errors.
+
 # 2.6.1
 
 ### Improvements
