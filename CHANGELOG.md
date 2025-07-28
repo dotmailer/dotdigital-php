@@ -1,4 +1,7 @@
-# 2.6.2
+# 2.7.0
+
+### What's new
+- We added a new v2 API method for unsubscribing a contact from an address book (list).
 
 ### Improvements
 - We added annotations for get methods in the Contact\Import model, to fix PHPStan errors.
