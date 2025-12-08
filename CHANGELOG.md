@@ -1,3 +1,8 @@
+# 2.8.0
+
+### What's new
+- We added new interfaces to define platform-side enums for email type and opt-in type in email channel properties.
+
 # 2.7.0
 
 ### What's new
