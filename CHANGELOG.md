@@ -1,3 +1,8 @@
+# 2.9.0
+
+### What's new
+- We added a new resource to retrieve segment lists from the API.
+
 # 2.8.0
 
 ### What's new
